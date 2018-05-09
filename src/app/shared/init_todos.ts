@@ -1,24 +1,13 @@
 export class Init {
   load(){
-    if(localStorage.getItem('todos')===null || localStorage.getItem('todos')===undefined){
-      console.log('No Todos Found !....creating....')
-      let todos = [
-
-          {
-            text:'write some angular code'
-          },
-          {
-            text:'write some GO code'
-          },
-          {
-            text:'write some Node code'
-          }
-      ];
-      localStorage.setItem('todos',JSON.stringify(todos));
+    if(localStorage.getItem('elements')===null || localStorage.getItem('elements')===undefined){
+      console.log('No Elements Found !....creating....')
+      let elements = [];
+      localStorage.setItem('elements',JSON.stringify(elements));
       return
     }
     else {
-      console.log('Found Todos...')
+      console.log('Found Elements...');
     }
   }
 }

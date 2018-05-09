@@ -1,0 +1,116 @@
+
+<div class="container">
+  <mat-card class="mat-elevation-z10">
+    <mat-card-header>
+
+      <mat-card-title></mat-card-title>
+      <mat-card-subtitle></mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content>
+      <div class="form-container">
+        <mat-form-field>
+          <mat-select [(ngModel)]="select" name="select"  placeholder="Select a form element">
+            <mat-option value="Textbox">Textbox</mat-option>
+            <mat-option value="Textarea">Textarea</mat-option>
+            <mat-option value="Select">Select List</mat-option>
+            <mat-option value="Radio">Radio</mat-option>
+            <mat-option value="Checkbox">Checkbox</mat-option>
+            <mat-option value="DatePicker">DatePicker</mat-option>
+            <mat-option value="Slider">Slider</mat-option>
+            <mat-option value="Slide">Slide Toggle</mat-option>
+            <mat-option value="Modal">Modal</mat-option>
+          </mat-select>
+        </mat-form-field>
+        <mat-form-field>
+          <input matInput [(ngModel)]="label" name="label" placeholder="Label">
+        </mat-form-field>
+        <mat-form-field>
+          <input matInput [(ngModel)]="placeholder" name="placeholder" placeholder="Placeholder">
+        </mat-form-field>
+        <button class="add" mat-raised-button color="primary" (click)="add()">Add</button>
+      </div>
+
+    </mat-card-content>
+    <mat-card-actions>
+      <!--<button class="btn" mat-raised-button color="primary">Primary</button>-->
+      <!--<button mat-button>SHARE</button>-->
+    </mat-card-actions>
+  </mat-card>
+  <div>
+    <ul>
+      <li *ngFor="let element of components">
+        {{element.select}} <button (click)="deleteElement(element.select)">X</button>
+      </li>
+    </ul>
+  </div>
+  <mat-card class="tab mat-elevation-z10">
+    <mat-card-header>
+
+      <mat-card-title></mat-card-title>
+      <mat-card-subtitle></mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content>
+      <div class="table-container">
+        <div class="table-header">
+          <mat-form-field>
+            <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
+          </mat-form-field>
+        </div>
+
+        <mat-table #table [dataSource]="dataSource">
+
+          <!-- Position Column -->
+          <ng-container matColumnDef="position">
+            <mat-header-cell *matHeaderCellDef> No. </mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{element.position}} </mat-cell>
+          </ng-container>
+
+          <!-- Name Column -->
+          <ng-container matColumnDef="name">
+            <mat-header-cell *matHeaderCellDef> Name </mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{element.name}} </mat-cell>
+          </ng-container>
+
+          <!-- Weight Column -->
+          <!--<ng-container matColumnDef="weight">-->
+            <!--<mat-header-cell *matHeaderCellDef> Weight </mat-header-cell>-->
+            <!--<mat-cell *matCellDef="let element"> {{element.weight}} </mat-cell>-->
+          <!--</ng-container>-->
+
+          <!-- Symbol Column -->
+          <ng-container matColumnDef="symbol">
+            <mat-header-cell *matHeaderCellDef> Symbol </mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{element.symbol}} </mat-cell>
+          </ng-container>
+
+          <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+          <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+        </mat-table>
+      </div>
+
+    </mat-card-content>
+    <mat-card-actions>
+      <!--<button class="btn" mat-raised-button color="primary">Primary</button>-->
+      <!--<button mat-button>SHARE</button>-->
+    </mat-card-actions>
+  </mat-card>
+  <mat-card class="tab mat-elevation-z10">
+    <mat-card-header>
+
+      <mat-card-title></mat-card-title>
+      <mat-card-subtitle></mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content>
+      <div class="btncontainer">
+      <button class="btn" mat-raised-button color="primary">Generate</button>
+      <button class="btn" mat-raised-button color="warn">Clear All</button>
+      </div>
+    </mat-card-content>
+    <mat-card-actions>
+      <!--<button class="btn" mat-raised-button color="primary">Primary</button>-->
+      <!--<button mat-button>SHARE</button>-->
+    </mat-card-actions>
+  </mat-card>
+</div>
+
+
