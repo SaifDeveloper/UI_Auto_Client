@@ -12,11 +12,17 @@ import {Reactive1Component} from './components/reactive1/reactive1.component';
 import { BuilderComponent } from './components/builder/builder.component';
 import { IndexComponent } from './components/index/index.component';
 import {PopulateService} from './services/populate.service';
+import {HttpClientModule} from '@angular/common/http';
+import { FormgenComponent } from './components/formgen/formgen.component';
+import {DialogService} from './services/dialog.service';
+import { DialogComponent } from './components/formgen/dialog/dialog.component';
+
 
 const routes: Routes = [
   { path: 'index', component: IndexComponent  },
   { path: 'builder', component: BuilderComponent  },
   { path: 'reactive', component: Reactive1Component  },
+  { path: 'formgen', component: FormgenComponent  },
   { path: '**', component: IndexComponent }
 ];
 
@@ -26,7 +32,12 @@ const routes: Routes = [
     AppComponent,
     Reactive1Component,
     BuilderComponent,
-    IndexComponent
+    IndexComponent,
+    FormgenComponent,
+    DialogComponent,
+  ],
+  entryComponents:[
+    DialogComponent
   ],
   imports: [
     BrowserModule,
@@ -37,8 +48,9 @@ const routes: Routes = [
     RouterModule.forRoot(
       routes
     ),
+    HttpClientModule
   ],
-  providers: [PopulateService],
+  providers: [PopulateService,DialogService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

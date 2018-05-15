@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {MatTableDataSource} from '@angular/material';
 import {PopulateService} from '../../services/populate.service';
+import {HttpClient, HttpErrorResponse} from '@angular/common/http';
 
 
 @Component({
@@ -11,19 +12,30 @@ import {PopulateService} from '../../services/populate.service';
 export class BuilderComponent implements OnInit {
 
   components=[];
-  select;label="saif";placeholder="ali";
 
+  select;label="saif";placeholder="ali";
+  // ELEMENT_DATA = JSON.parse(localStorage.getItem('elements'));
+  ELEMENT_DATA = this.elementData;
   constructor(private populate:PopulateService) { }
 
   ngOnInit() {
     this.components = this.populate.getElements();
+    // this.updateTable()
+
   }
 
+  get elementData() {
+    this.ELEMENT_DATA = JSON.parse(localStorage.getItem('elements'));
+    return this.ELEMENT_DATA;
+  }
+
+  updateTable(){
+    this.ELEMENT_DATA=JSON.parse(localStorage.getItem('elements'));
+    console.log("ELEMENT_DATA:",this.ELEMENT_DATA);
+    console.log("TABLE UPDATED !!!")
+  }
 
   add(){
-    console.log("Select:",this.select);
-    console.log("label:",this.label);
-    console.log("placeholder:",this.placeholder);
     let newElement = {
       select:this.select,
       label:this.label,
@@ -32,7 +44,11 @@ export class BuilderComponent implements OnInit {
     console.log("NEW ELEMENT:",newElement);
     this.components.push(newElement);
     console.log("COMPONENTS",this.components);
-    this.populate.addElement(newElement)
+    this.populate.addElement(newElement);
+    this.updateTable();
+    // this.ELEMENT_DATA = this.components;
+    console.log("Element data:",this.ELEMENT_DATA);
+    console.log("Components:",this.components);
   }
 
   deleteElement(element){
@@ -46,8 +62,8 @@ export class BuilderComponent implements OnInit {
   }
 
 
-  displayedColumns = ['position', 'name', 'symbol'];
-  dataSource = new MatTableDataSource(ELEMENT_DATA);
+  displayedColumns = ['label', 'select','action'];
+  dataSource = new MatTableDataSource(this.ELEMENT_DATA);
   applyFilter(filterValue: string) {
     filterValue = filterValue.trim(); // Remove whitespace
     filterValue = filterValue.toLowerCase(); // MatTableDataSource defaults to lowercase matches
@@ -57,23 +73,11 @@ export class BuilderComponent implements OnInit {
 
 
 }
-export interface Element {
-  name: string;
-  position: number;
-  symbol: string;
-}
+// export interface Element {
+//   element: string;
+//   position: number;
+// }
 
-const ELEMENT_DATA: Element[] = [
-  {position: 1, name: 'Hydrogen', symbol: 'H'},
-  {position: 2, name: 'Helium', symbol: 'He'},
-  {position: 3, name: 'Lithium', symbol: 'Li'},
-  // {position: 4, name: 'Beryllium', weight: 9.0122, symbol: 'Be'},
-  // {position: 5, name: 'Boron', weight: 10.811, symbol: 'B'},
-  // {position: 6, name: 'Carbon', weight: 12.0107, symbol: 'C'},
-  // {position: 7, name: 'Nitrogen', weight: 14.0067, symbol: 'N'},
-  // {position: 8, name: 'Oxygen', weight: 15.9994, symbol: 'O'},
-  // {position: 9, name: 'Fluorine', weight: 18.9984, symbol: 'F'},
-  // {position: 10, name: 'Neon', weight: 20.1797, symbol: 'Ne'}
-];
+
 
 

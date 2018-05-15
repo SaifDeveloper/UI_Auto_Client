@@ -1,0 +1,72 @@
+<div class="container">
+  <mat-card class="mat-elevation-z10">
+    <mat-card-header>
+
+      <mat-card-title></mat-card-title>
+      <mat-card-subtitle></mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content>
+      <div class="form-container">
+        <mat-form-field>
+          <mat-select [(ngModel)]="select" name="select"  placeholder="Select a form element">
+            <mat-option value="Textbox">Textbox</mat-option>
+            <mat-option value="Textarea">Textarea</mat-option>
+            <mat-option value="Select">Select List</mat-option>
+            <mat-option value="Radio">Radio</mat-option>
+            <mat-option value="Checkbox">Checkbox</mat-option>
+            <mat-option value="DatePicker">DatePicker</mat-option>
+            <mat-option value="Slider">Slider</mat-option>
+            <mat-option value="Slide">Slide Toggle</mat-option>
+            <mat-option value="Modal">Modal</mat-option>
+          </mat-select>
+        </mat-form-field>
+        <mat-form-field>
+          <input matInput [(ngModel)]="label" name="label" placeholder="Label">
+        </mat-form-field>
+        <mat-form-field>
+          <input matInput [(ngModel)]="placeholder" name="placeholder" placeholder="Placeholder">
+        </mat-form-field>
+        <button class="add" mat-raised-button color="primary" (click)="add()">Add</button>
+      </div>
+
+    </mat-card-content>
+    <mat-card-actions>
+      <!--<button class="btn" mat-raised-button color="primary">Primary</button>-->
+      <!--<button mat-button>SHARE</button>-->
+    </mat-card-actions>
+  </mat-card>
+  <div *ngFor="let element of components">
+        <mat-card class="tab mat-elevation-z10">
+          <mat-card-header>
+
+            <mat-card-title> {{element.select}}</mat-card-title>
+            <mat-card-subtitle></mat-card-subtitle>
+          </mat-card-header>
+          <mat-card-content>
+            <button mat-raised-button color="warn" (click)="deleteElement(element.select)">Delete</button>
+            <button mat-raised-button color="accent" (click)="openDialog(element.select)">Review</button>
+          </mat-card-content>
+        </mat-card>
+  </div>
+
+
+  <mat-card class="tab mat-elevation-z10">
+    <mat-card-header>
+
+      <mat-card-title></mat-card-title>
+      <mat-card-subtitle></mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content>
+      <div class="btncontainer">
+        <button class="btn" mat-raised-button color="primary">Generate</button>
+        <button class="btn" mat-raised-button color="warn">Clear All</button>
+      </div>
+    </mat-card-content>
+    <mat-card-actions>
+      <!--<button class="btn" mat-raised-button color="primary">Primary</button>-->
+      <!--<button mat-button>SHARE</button>-->
+    </mat-card-actions>
+  </mat-card>
+</div>
+
+

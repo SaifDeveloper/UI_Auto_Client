@@ -1,11 +1,18 @@
-import { Injectable } from '@angular/core';
+import {Injectable, OnInit} from '@angular/core';
 import {Init} from '../shared/init_todos';
+import {HttpClient, HttpErrorResponse} from '@angular/common/http';
 
 @Injectable()
-export class PopulateService extends Init{
+export class PopulateService extends Init implements OnInit{
+
+  ngOnInit() {
 
 
-  constructor() {
+  }
+
+
+
+  constructor(private httpService: HttpClient) {
     super();
     console.log('ElementService Initialized...')
     this.load();
@@ -19,15 +26,14 @@ export class PopulateService extends Init{
   addElement(newElement) {
     console.log("inside addTodo...newTodo:",newElement);
 
-    // let todos = [];
-    // localStorage.setItem('todos',JSON.stringify(todos));
-    //
     let element = JSON.parse(localStorage.getItem('elements'));
     //Add New Element
     element.push(newElement);
-    //Set New Todos
+    //Set New Elements
     localStorage.setItem('elements', JSON.stringify(element));
   }
+
+
 
   deleteElement(element) {
     console.log("service delete element!")

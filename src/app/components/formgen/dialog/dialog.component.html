@@ -1,0 +1,32 @@
+<div  *ngIf="current_element == 'Textarea'">
+
+  <h1 mat-dialog-title>{{current_element}}</h1>
+
+    <mat-form-field>
+      <input matInput [(ngModel)]="placeholder" name="placeholder" placeholder="Placeholder">
+    </mat-form-field>
+  <div mat-dialog-actions>
+    <button mat-button color="accent" (click)="save(current_element)">Save</button>
+  </div>
+</div>
+
+
+
+<div  *ngIf="current_element == 'Radio'">
+  <h1 mat-dialog-title>{{current_element}}</h1>
+
+  <mat-form-field>
+    <input matInput [(ngModel)]="placeholder" name="placeholder" placeholder="Placeholder">
+  </mat-form-field>
+  <br>
+  <mat-form-field *ngFor="let item of form_array ; let idx = index; ">
+    <input matInput [(ngModel)]="listOfOptions[idx]" name="checkentry_{{idx}}" placeholder="Enter Option" id="checkentry{{idx}}">
+  </mat-form-field>
+  <br>
+  <button mat-fab color="primary" (click)="duplicate()">+</button>
+
+
+  <div mat-dialog-actions>
+    <button mat-button color="accent" (click)="save()">Save</button>
+  </div>
+</div>
